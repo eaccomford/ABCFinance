@@ -45,7 +45,6 @@ class BookingController extends Controller
             if ($validatedData->fails()) {
                 return $validatedData->errors();
             } else {
-                exit('ddd');
                 $requestData['fullname'] = $request->fullname;
                 $requestData['transportType'] = $request->transportType;
                 $requestData['date'] = date(now());
