@@ -23,12 +23,8 @@
                                             </div>
                                             <div class="col-xl-8 col-md-12">
                                                 <div class="d-flex align-items-center justify-content-xl-end flex-wrap">
-                                                    <div class="mr-3">
-                                                        <small class="text-muted">From:</small>
-                                                        <span>08/10/2019</span>
-                                                    </div>
                                                     <div>
-                                                        <small class="text-muted">To:</small>
+                                                        <small class="text-muted">Date:</small>
                                                         <span>08/10/2019</span>
                                                     </div>
                                                 </div>
@@ -38,7 +34,13 @@
                                         <div class="row my-3">
                                             <div class="col-6">
                                                 <h4 class="text-primary">Customer Name</h4>
-                                                <span>Emmanuel Accomford</span>
+                                                    <span>{{ $deposits->fname.' '.$deposits->lname }}</span>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="float-right">
+                                                    <h4 class="text-primary">Account Type</h4>
+                                                    <span>{{ $deposits->accname }}</span>
+                                                </div>
                                             </div>
                                             {{-- <div class="col-6 d-flex justify-content-end">
                                                 <img src="../../../app-assets/images/pages/pixinvent-logo.png" alt="logo" height="46" width="164">
@@ -50,10 +52,10 @@
                                             <div class="col-6 mt-1">
                                                 <h6 class="invoice-from">Details</h6>
                                                 <div class="mb-1">
-                                                    <span>Phone</span> : 0383838393
+                                                    <span>Phone</span> : {{ $deposits->phone }}
                                                 </div>
                                                 <div class="mb-1">
-                                                    <span>Address</span>: APD 200089
+                                                    <span>Address</span>: {{ $deposits->address }}
                                                 </div>
                                             </div>
                                             <div class="col-6 mt-1">
@@ -64,20 +66,23 @@
                                     </div>
                                     <!-- product details table-->
                                     <div class="invoice-product-details table-responsive mx-md-25">
+                                        <h6 class="invoice-from ml-2">Bank Notes</h6>
                                         <table class="table table-borderless mb-0">
                                             <thead>
                                                 <tr class="border-0">
-                                                    <th scope="col">Account name</th>
-                                                    <th scope="col">Account Number</th>
-                                                    <th scope="col">Current Balance</th>
+                                                    <th scope="col">Note</th>
+                                                    <th scope="col">Quantity</th>
+                                                    <th scope="col" class="text-right ">Amount</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>Frest Admin</td>
-                                                    <td>HTML Admin Template</td>
-                                                    <td class="text-primary text-right font-weight-bold">$28.00</td>
-                                                </tr>
+                                                @foreach($deposit_notes as $key => $value)
+                                                    <tr>
+                                                        <td>{{ $value->note }}</td>
+                                                        <td>{{ $value->qty }}</td>
+                                                        <td class="text-primary text-right font-weight-bold">GHC{{ $value->qty * $value->note }}</td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -93,7 +98,7 @@
                                                 <div class="invoice-subtotal">
                                                     <div class="invoice-calc d-flex justify-content-between">
                                                         <span class="invoice-title">Subtotal</span>
-                                                        <span class="invoice-value pl-5">GHC 7600</span>
+                                                        <span class="invoice-value pl-5">GHC {{ $deposits->total }}</span>
                                                     </div>
                                                     
                                                 </div>
@@ -108,9 +113,9 @@
                             <div class="card invoice-action-wrapper shadow-none border">
                                 <div class="card-body">
                                     <div class="invoice-action-btn">
-                                    <a href="{{url('/customers')}}" class="btn btn-primary btn-block invoice-send-btn">
+                                    <a href="{{url('/deposits')}}" class="btn btn-primary btn-block invoice-send-btn">
                                             <i class="bx bx-chevron-left"></i>
-                                            <span>Customers</span>
+                                            <span>Deposits</span>
                                         </a>
                                     </div>
                                     <div class="invoice-action-btn">

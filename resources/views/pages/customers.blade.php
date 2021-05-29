@@ -57,32 +57,38 @@
                                 </tr>
                             </thead>
                             <tbody>
-
-                                <tr>
-                                    <td>
-                                        <a href="app-invoice.html">INV-00956</a>
-                                    </td>
-                                    <td><span class="invoice-customer">Pixinvent PVT. LTD</span></td>
-                                    <td>
-                                        <span class="bullet bullet-success bullet-sm"></span>
-                                        <small class="text-muted">Technology</small>
-                                    </td>
-                                    <td><span class="badge badge-light-danger badge-pill">UNPAID</span></td>
-                                    <td>
-                                        <div class="invoice-action">
-                                            <a href="{{url('/show-customer/2')}}" class="invoice-action-view mr-1">
-                                                <i class="bx bx-show-alt"></i>
-                                            </a>
-                                            <a href="{{url('/customer-statement/2')}}" class="invoice-action-view mr-1">
-                                                <i class="bx bx-file"></i> 
-                                            </a>
-                                            <a href="app-invoice-edit.html" class="invoice-action-edit cursor-pointer">
-                                                <i class="bx bx-edit"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-
+                                @if(count($customers) == 0)
+                                    <tr>
+                                        <td>No Record Found</td>
+                                    </tr>
+                                @else
+                                    @foreach($customers as $key => $customer)
+                                    <tr>
+                                        <td>
+                                        <a href="#">{{$customer->id}}</a>
+                                        </td>
+                                        <td><span class="invoice-customer">{{$customer->fname .' '. $customer->lname}}</span></td>
+                                        <td>
+                                            <span class="bullet bullet-success bullet-sm"></span>
+                                            <small class="text-muted">{{$customer->phone}}</small>
+                                        </td>
+                                        <td><span class="badge badge-light-danger badge-pill">{{$customer->address}}</span></td>
+                                        <td>
+                                            <div class="invoice-action">
+                                                <a href="{{url('/show-customer')}}/{{$customer->id}}" class="invoice-action-view mr-1">
+                                                    <i class="bx bx-show-alt"></i>
+                                                </a>
+                                                <a href="{{url('/customer-statement')}}/{{$customer->id}}" class="invoice-action-view mr-1">
+                                                    <i class="bx bx-file"></i> 
+                                                </a>
+                                                <a href="#" class="invoice-action-edit cursor-pointer">
+                                                    <i class="bx bx-edit"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>

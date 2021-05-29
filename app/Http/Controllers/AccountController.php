@@ -51,8 +51,8 @@ class AccountController extends Controller
 
             foreach ($_POST['name'] as $k => $value) {
                 $name  = $_POST['name'][$k]; $code = $_POST['code'][$k];
-                if(DB::table('accounts')->where('name',$name)->where('code', $code)->count() > 0){
-                    Session::flash('message', 'Account Already Created');
+                if(DB::table('accounts')->where('code', $code)->count() > 0){
+                    Session::flash('message', 'Error, Account code Already Exist');
                     return view('pages.new-account');
                 }
             }

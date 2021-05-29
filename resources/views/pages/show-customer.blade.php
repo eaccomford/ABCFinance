@@ -25,11 +25,11 @@
                                                 <div class="d-flex align-items-center justify-content-xl-end flex-wrap">
                                                     <div class="mr-3">
                                                         <small class="text-muted">From:</small>
-                                                        <span>08/10/2019</span>
+                                                        <span>{{$customer->created_at}}</span>
                                                     </div>
                                                     <div>
                                                         <small class="text-muted">To:</small>
-                                                        <span>08/10/2019</span>
+                                                        <span>{{date('Y-m-d', strtotime(now()))}}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -38,7 +38,7 @@
                                         <div class="row my-3">
                                             <div class="col-6">
                                                 <h4 class="text-primary">Customer Name</h4>
-                                                <span>Emmanuel Accomford</span>
+                                                <span>{{$customer->fname .' '. $customer->lname}}</span>
                                             </div>
                                             {{-- <div class="col-6 d-flex justify-content-end">
                                                 <img src="../../../app-assets/images/pages/pixinvent-logo.png" alt="logo" height="46" width="164">
@@ -50,10 +50,13 @@
                                             <div class="col-6 mt-1">
                                                 <h6 class="invoice-from">Details</h6>
                                                 <div class="mb-1">
-                                                    <span>Phone</span> : 0383838393
+                                                    <span>Phone</span> : {{$customer->phone}}
                                                 </div>
                                                 <div class="mb-1">
-                                                    <span>Address</span>: APD 200089
+                                                    <span>Address</span>: {{$customer->address}}
+                                                </div>
+                                                <div class="mb-1">
+                                                    <span>National ID Card</span>: {{$account_numbers[0]->idcard}}
                                                 </div>
                                             </div>
                                             <div class="col-6 mt-1">
@@ -69,15 +72,18 @@
                                                 <tr class="border-0">
                                                     <th scope="col">Account name</th>
                                                     <th scope="col">Account Number</th>
-                                                    <th scope="col">Current Balance</th>
+                                                    <th scope="col" class="text-right font-weight-bold">Current Balance</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach($account_numbers as $key => $value)
                                                 <tr>
-                                                    <td>Frest Admin</td>
-                                                    <td>HTML Admin Template</td>
-                                                    <td class="text-primary text-right font-weight-bold">$28.00</td>
+                                                    <td>{{$value->name}}</td>
+                                                    <td>{{$value->acc_number}}</td>
+                                                    <td class="text-primary text-right font-weight-bold">GHC{{$value->amount}}</td>
                                                 </tr>
+                                                @endforeach
+                                                
                                             </tbody>
                                         </table>
                                     </div>

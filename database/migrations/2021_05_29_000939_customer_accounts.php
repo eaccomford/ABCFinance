@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDepositNotesTable extends Migration
+class CustomerAccounts extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateDepositNotesTable extends Migration
      */
     public function up()
     {
-        Schema::create('deposit_notes', function (Blueprint $table) {
+        Schema::create('customer_accounts', function (Blueprint $table) {
             $table->id();
-            $table->integer('deposit_id');
-            $table->integer('note');
-            $table->integer('qty');
-            $table->integer('createdby')->nullable()->useCurrent();
+            $table->integer('customer_id');
+            $table->text('account');
+            $table->text('amount');
+            $table->text('acc_number');
+            $table->text('idcard');
+            $table->integer('createdby')->nullable()->useCurrent();;
             $table->integer('modby')->nullable();
             $table->timestamps();
         });
@@ -31,6 +33,6 @@ class CreateDepositNotesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('deposit_notes');
+        Schema::dropIfExists('customer_accounts');
     }
 }

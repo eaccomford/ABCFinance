@@ -18,7 +18,7 @@ class CreateDepositsTable extends Migration
             $table->integer('acc_no');
             $table->text('total');
             $table->date('date');
-            $table->integer('createdby')->nullable();
+            $table->integer('createdby')->nullable()->useCurrent();
             $table->integer('modby')->nullable();
             $table->timestamps();
         });

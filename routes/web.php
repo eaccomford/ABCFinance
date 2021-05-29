@@ -47,7 +47,9 @@ Route::post('/account', [App\Http\Controllers\AccountController::class, 'store']
 
 Route::post('/new-account', [App\Http\Controllers\CustomerController::class, 'new_customer']);
 
+//** End Points */
 Route::get('/customer-statement/{id}', [App\Http\Controllers\CustomerController::class, 'statement']);
+Route::get('/check-deposit/{id}', [App\Http\Controllers\DepositController::class, 'check_deposit']);
 
 
 

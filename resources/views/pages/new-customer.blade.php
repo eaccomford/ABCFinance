@@ -18,6 +18,12 @@
                                         <h2>New Customer</h2>
                                     </div>
                                     <hr>
+                                    @if(Session::has('message'))
+                                        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+                                    @endif
+                                    @if(Session::has('error'))
+                                        <p class="alert {{ Session::get('alert-class', 'alert-danger') }}">{{ Session::get('error') }}</p>
+                                    @endif
                                     <form action="{{url('/customer')}}" method="post">
                                         @csrf
                                     <div class="card-body pb-0 mx-25">
@@ -26,16 +32,19 @@
                                             <div class="col-lg-6 col-md-12 mt-25">
                                                 <h6 class="invoice-to">Customer Information</h6>
                                                 <fieldset class="invoice-address form-group">
-                                                    <input type="text" name="fname" class="form-control" placeholder="First Name">
+                                                    <input type="text" name="fname" class="form-control" placeholder="First Name" required autocomplete="false">
                                                 </fieldset>
                                                 <fieldset class="invoice-address form-group">
-                                                    <input type="text" name="lname" class="form-control" placeholder="Last Name">
+                                                    <input type="text" name="lname" class="form-control" placeholder="Last Name" required autocomplete="false">
                                                 </fieldset>
                                                 <fieldset class="invoice-address form-group">
-                                                    <input type="text" name="phone" class="form-control" placeholder="Phone">
+                                                    <input type="text" name="phone" class="form-control" placeholder="Phone" required>
                                                 </fieldset>
                                                 <fieldset class="invoice-address form-group">
-                                                    <input type="number" name="address" class="form-control" placeholder="Address">
+                                                    <input type="text" name="address" class="form-control" placeholder="Address" required>
+                                                </fieldset>
+                                                <fieldset class="invoice-address form-group">
+                                                    <input type="text" name="idcard" class="form-control" placeholder="National ID Card Number" required>
                                                 </fieldset>
                                             </div>
                                         </div>
@@ -57,12 +66,12 @@
                                                         <td>
                                                             <select name="account[]" id="" class="form-control">
                                                                 <option value="">select account</option>
-                                                                @foreach($accounts as $key => $value)
+                                                                @foreach($accounts ?? '' as $key => $value)
                                                                    <option value="{{ $value->id }}">{{ $value->code.' ('.$value->name.')' }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </td>
-                                                        <td><input type="number" name="code[]" class="form-control" placeholder="Initial Amount"></td>
+                                                        <td><input type="number" name="amount[]" class="form-control" placeholder="Initial Amount"></td>
                                                         <td>
                                                             <a href="#" class="btn btn-danger removeRow"><i class="bx bx-trash"></i></a>
                                                         </td>

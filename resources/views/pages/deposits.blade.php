@@ -52,38 +52,34 @@
                                     </th>
                                     <th>Date</th>
                                     <th>Customer</th>
-                                    <th>Amount</th>
-                                    <th>Account</th>
+                                    <th>Account Number</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-
-                                <tr>
-                                    <td>
-                                        <a href="app-invoice.html">INV-00956</a>
-                                    </td>
-                                    <td><span class="invoice-amount">$459.30</span></td>
-                                    <td><small class="text-muted">12-08-19</small></td>
-                                    <td><span class="invoice-customer">Pixinvent PVT. LTD</span></td>
-                                    <td>
-                                        <span class="bullet bullet-success bullet-sm"></span>
-                                        <small class="text-muted">Technology</small>
-                                    </td>
-                                    <td>
-                                        <div class="invoice-action">
-                                            <a href="{{url('/show-deposit/2')}}" class="invoice-action-view mr-1">
-                                                <i class="bx bx-show-alt"></i>
-                                            </a>
-                                            <a href="app-invoice-edit.html" class="invoice-action-edit cursor-pointer">
-                                                <i class="bx bx-edit"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-
+                                @foreach($deposits as $key => $value)
+                                    <tr>
+                                        <td>
+                                         <a href="#">{{$key + 1}}</a>
+                                        </td>
+                                        <td><small class="text-muted">{{ $value->created_at }}</small></td>
+                                        <td><span class="invoice-amount">{{ $value->fname.' '.$value->lname }}</span></td>
+                                        <td><span class="invoice-customer">{{ $value->acc_number }}</span></td>
+                                        <td>
+                                            <div class="invoice-action">
+                                                <a href="{{url('/show-deposit')}}/{{ $value->id }}" class="invoice-action-view mr-1">
+                                                    <i class="bx bx-show-alt"></i>
+                                                </a>
+                                                <a href="#" class="invoice-action-edit cursor-pointer">
+                                                    <i class="bx bx-edit"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
+                        {{ $deposits->render("pagination::bootstrap-4") }} 
                     </div>
                 </section>
             </div>

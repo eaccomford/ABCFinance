@@ -17,7 +17,7 @@ class CreateAccountsTable extends Migration
             $table->id();
             $table->text('name');
             $table->text('code');
-            $table->integer('createdby')->nullable();
+            $table->integer('createdby')->nullable()->useCurrent();
             $table->integer('modby')->nullable();
             $table->timestamps();
         });

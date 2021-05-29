@@ -19,7 +19,7 @@ class CreateCustomersTable extends Migration
             $table->text('lname');
             $table->text('phone');
             $table->text('address');
-            $table->integer('createdby')->nullable();
+            $table->integer('createdby')->nullable()->useCurrent();
             $table->integer('modby')->nullable();
             $table->timestamps();
         });

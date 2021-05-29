@@ -18,7 +18,7 @@ class CreateWithdrawalsTable extends Migration
             $table->text('acc_no');
             $table->text('amount');
             $table->date('date');
-            $table->integer('createdby')->nullable();
+            $table->integer('createdby')->nullable()->useCurrent();
             $table->integer('modby')->nullable();
             $table->timestamps();
         });
