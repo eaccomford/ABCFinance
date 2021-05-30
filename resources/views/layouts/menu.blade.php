@@ -29,7 +29,7 @@
             <li class=" nav-item"><a href="{{url('/show-savings')}}"><i class="menu-livicon" data-icon="settings"></i><span class="menu-title" data-i18n="Invoice">Settings</span></a>
                 <ul class="menu-content">
                     <li><a href="{{url('/customers')}}"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">Customers</span></a></li>
-                    <li><a href="{{url('/accounts')}}"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">Account Setup</span></a></li>
+                    <li><a href="{{url('/accounts')}}"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">Account Types</span></a></li>
                 </ul>
             </li>
             

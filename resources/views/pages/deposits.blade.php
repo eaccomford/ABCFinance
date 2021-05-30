@@ -52,6 +52,7 @@
                                     </th>
                                     <th>Date</th>
                                     <th>Customer</th>
+                                    <th>Amount (GHC)</th>
                                     <th>Account Number</th>
                                     <th>Action</th>
                                 </tr>
@@ -64,6 +65,7 @@
                                         </td>
                                         <td><small class="text-muted">{{ $value->created_at }}</small></td>
                                         <td><span class="invoice-amount">{{ $value->fname.' '.$value->lname }}</span></td>
+                                        <td><small class="text-muted">{{ $value->total }}</small></td>
                                         <td><span class="invoice-customer">{{ $value->acc_number }}</span></td>
                                         <td>
                                             <div class="invoice-action">

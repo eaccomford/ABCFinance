@@ -78,9 +78,7 @@
                                                 <a href="{{url('/show-customer')}}/{{$customer->id}}" class="invoice-action-view mr-1">
                                                     <i class="bx bx-show-alt"></i>
                                                 </a>
-                                                <a href="{{url('/customer-statement')}}/{{$customer->id}}" class="invoice-action-view mr-1">
-                                                    <i class="bx bx-file"></i> 
-                                                </a>
+                                                
                                                 <a href="#" class="invoice-action-edit cursor-pointer">
                                                     <i class="bx bx-edit"></i>
                                                 </a>

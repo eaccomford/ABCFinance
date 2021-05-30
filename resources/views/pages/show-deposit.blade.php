@@ -25,7 +25,7 @@
                                                 <div class="d-flex align-items-center justify-content-xl-end flex-wrap">
                                                     <div>
                                                         <small class="text-muted">Date:</small>
-                                                        <span>08/10/2019</span>
+                                                        <span>{{ date('d-m-Y', strtotime(now()))}}</span>
                                                     </div>
                                                 </div>
                                             </div>

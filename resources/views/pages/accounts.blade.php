@@ -14,7 +14,7 @@
                     
                     <div class="invoice-create-btn mb-1 pl-3 pt-3">
                         <div class="row">
-                            <h2>Accounts Setup</h2>
+                            <h2>Account Types</h2>
                         </div>
                         <hr>
                     <a href="{{url('new-account')}}" class="btn btn-primary glow invoice-create" role="button" aria-pressed="true">New Account</a>

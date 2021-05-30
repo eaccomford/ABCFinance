@@ -20,7 +20,7 @@ class DepositController extends Controller
      */
     public function index()
     {
-        $deposits = DB::table('customer_account_vw as c')->join('deposits as d', 'd.acc_no', '=', 'c.acc_number')->orderBy('d.id', 'desc')->paginate(10);
+        $deposits = DB::table('customer_account_vw as c')->join('deposits as d', 'd.acc_no', '=', 'c.acc_number')->orderBy('d.id', 'desc')->paginate(10); 
         $data = [
             'deposits' => $deposits
         ];
@@ -62,7 +62,7 @@ class DepositController extends Controller
 
                 if ($inserId = DB::table('deposits')->insertGetId($requestData)) {
                     
-                    DB::table('Deposit_notes')->insert($this->processBankNotes($_POST, $inserId));
+                    DB::table('Deposit_notes')->insert($this->processBankNotes($inserId));
                     return response()->json(['res' => 1, 'info' => 'success, record created'], 201);
                 }
             }
@@ -71,7 +71,7 @@ class DepositController extends Controller
         }
     }
 
-    protected function processBankNotes($post, $inserId)
+    protected function processBankNotes($inserId)
     {
         $accoutData = [];
         if($_POST['qty200'] != ''){

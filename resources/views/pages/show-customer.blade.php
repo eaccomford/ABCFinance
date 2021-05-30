@@ -73,6 +73,7 @@
                                                     <th scope="col">Account name</th>
                                                     <th scope="col">Account Number</th>
                                                     <th scope="col" class="text-right font-weight-bold">Current Balance</th>
+                                                    <th>Statement</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -81,6 +82,11 @@
                                                     <td>{{$value->name}}</td>
                                                     <td>{{$value->acc_number}}</td>
                                                     <td class="text-primary text-right font-weight-bold">GHC{{$value->amount}}</td>
+                                                    <th>
+                                                        <a href="{{url('/customer-statement')}}/{{$value->acc_number}}" class="invoice-action-view mr-1">
+                                                            <i class="bx bx-file"></i> 
+                                                        </a>
+                                                    </th>
                                                 </tr>
                                                 @endforeach
                                                 

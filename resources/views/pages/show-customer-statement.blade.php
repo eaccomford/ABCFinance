@@ -24,60 +24,103 @@
                                             <div class="col-xl-8 col-md-12">
                                                 <div class="d-flex align-items-center justify-content-xl-end flex-wrap">
                                                     <div class="mr-3">
-                                                        <small class="text-muted">From:</small>
-                                                        <span>08/10/2019</span>
+                                                        {{-- <small class="text-muted">From:</small>
+                                                        <span>08/10/2019</span> --}}
                                                     </div>
                                                     <div>
                                                         <small class="text-muted">To:</small>
-                                                        <span>08/10/2019</span>
+                                                        <span>{{ date('d-m-Y', strtotime(now()))}}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- logo and title -->
+                                       
                                         <div class="row my-3">
+                                            
                                             <div class="col-6">
-                                                <h4 class="text-primary">Customer Name</h4>
-                                                <span>Emmanuel Accomford</span>
+                                                <div class="">
+                                                    <h6 class="invoice-from">Customer Details</h6>
+                                                </div>
+                                                <hr>
+                                                <h6 class="text-primary">Customer Name</h6>
+                                                <span><b>{{ $customer->fname .' '.$customer->lname }}</b></span>
+                                                <div class="mb-1 mt-2">
+                                                    <span>Phone</span> : {{ $customer->phone }}
+                                                </div>
+                                                <div class="mb-1">
+                                                    <span>Address</span>: {{ $customer->address }}
+                                                </div>
+                                                <div class="mb-1 mt-2">
+                                                    <span> Type</span> : {{ $customer->accname }}
+                                                </div>
                                             </div>
                                             {{-- <div class="col-6 d-flex justify-content-end">
                                                 <img src="../../../app-assets/images/pages/pixinvent-logo.png" alt="logo" height="46" width="164">
                                             </div> --}}
                                         </div>
-                                        <hr>
+                                        
                                         <!-- invoice address and contact -->
                                         <div class="row invoice-info">
                                             <div class="col-6 mt-1">
-                                                <h6 class="invoice-from">Details</h6>
+                                                <h6 class="invoice-from">Account Summary</h6>
+                                                <hr>
                                                 <div class="mb-1">
-                                                    <span>Phone</span> : 0383838393
+                                                    <span>Deposits</span> : GHC {{ number_format($totalDeposit, 2) }}
                                                 </div>
                                                 <div class="mb-1">
-                                                    <span>Address</span>: APD 200089
+                                                    <span>Withdrawals</span>: GHC {{ number_format($totalWithdrawal,2) }}
                                                 </div>
                                             </div>
                                             <div class="col-6 mt-1">
                                                 
                                             </div>
                                         </div>
-                                        <hr>
                                     </div>
-                                    <!-- product details table-->
-                                    <div class="invoice-product-details table-responsive mx-md-25">
+                                    <!-- deposit transactions-->
+                                    <div class="invoice-product-details table-responsive mx-md-25 mt-5">
+                                        <h6 class="invoice-from ml-2">Deposit Transactions</h6>
+                                        <hr>
+                                        <table class="table table-borderless mb-0">
+                                            <thead>
+                                                <tr class="border-0">
+                                                    <th scope="col">Date</th>
+                                                    <th scope="col">Transacted By</th>
+                                                    <th scope="col" class="text-right">Amount (GHC)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($withdrawals as $key => $value)
+                                                <tr>
+                                                    <td>{{ $value->created_at }}</td>
+                                                    <td>Ama Lee</td>
+                                                    <td class="text-primary text-right font-weight-bold">{{ number_format($value->amount,2) }}</td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <!-- withdrawal transactions-->
+                                    <div class="invoice-product-details table-responsive mx-md-25 mt-5">
+                                        <h6 class="invoice-from ml-2">Withdrawal Transactions</h6>
+                                        <hr>
                                         <table class="table table-borderless mb-0">
                                             <thead>
                                                 <tr class="border-0">
                                                     <th scope="col">Account name</th>
-                                                    <th scope="col">Account Number</th>
-                                                    <th scope="col">Current Balance</th>
+                                                    <th scope="col">Transacted By</th>
+                                                    <th scope="col" class="text-right">Amount (GHC)</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach($deposits as $key => $value)
                                                 <tr>
-                                                    <td>Frest Admin</td>
-                                                    <td>HTML Admin Template</td>
-                                                    <td class="text-primary text-right font-weight-bold">$28.00</td>
+                                                    <td>{{ $value->created_at }}</td>
+                                                    <td>Kofe Brown</td>
+                                                    <td class="text-primary text-right font-weight-bold">{{ number_format($value->total,2) }}</td>
                                                 </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -89,10 +132,10 @@
                                             <div class="col-4 col-sm-6 mt-75"> </div>
                                             <div class="col-8 col-sm-6 d-flex justify-content-end mt-75">
                                                 <div class="invoice-subtotal">
-                                                    <div class="invoice-calc d-flex justify-content-between">
+                                                    {{-- <div class="invoice-calc d-flex justify-content-between">
                                                         <span class="invoice-title">Subtotal</span>
                                                         <span class="invoice-value pl-5">GHC 7600</span>
-                                                    </div>
+                                                    </div> --}}
                                                     
                                                 </div>
                                             </div>

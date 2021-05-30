@@ -50,6 +50,7 @@ Route::post('/new-account', [App\Http\Controllers\CustomerController::class, 'ne
 //** End Points */
 Route::get('/customer-statement/{id}', [App\Http\Controllers\CustomerController::class, 'statement']);
 Route::get('/check-deposit/{id}', [App\Http\Controllers\DepositController::class, 'check_deposit']);
+Route::get('/check-withdrawal/{id}', [App\Http\Controllers\WithdrawalController::class, 'check_withdrawal']);
 
 
 

@@ -112,9 +112,23 @@ class CustomerController extends Controller
         return view('pages.show-customer', $data);
     }
 
-    public function statement($id)
+    public function statement($accno)
     {
-        return view('pages.show-customer-statement');
+        $customer = DB::table('customer_account_vw')->where('acc_number', $accno)->first();
+        $withdrawals = DB::table('withdrawals')->where('acc_no', $accno)->orderBy('id', 'desc')->get();
+        $deposits = DB::table('deposits')->where('acc_no', $accno)->orderBy('id', 'desc')->get();
+
+        $totalDeposit =  DB::table('deposits')->where('acc_no', $accno)->sum('total');
+        $totalWithdrawal =  DB::table('withdrawals')->where('acc_no', $accno)->sum('amount');
+
+        $data = [
+            'customer' => $customer,
+            'totalDeposit' => $totalDeposit,
+            'totalWithdrawal' => $totalWithdrawal,
+            'withdrawals' => $withdrawals,
+            'deposits' => $deposits,
+        ];
+        return view('pages.show-customer-statement', $data);
     }
 
     /**
