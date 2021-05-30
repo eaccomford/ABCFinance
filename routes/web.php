@@ -39,7 +39,6 @@ Route::post('/withdrawal', [App\Http\Controllers\WithdrawalController::class, 's
 Route::post('/account', [App\Http\Controllers\AccountController::class, 'store']);
 
 
-Route::post('/new-account', [App\Http\Controllers\CustomerController::class, 'new_customer']);
 
 //** End Points */
 Route::group(['prefix' => 'api/'], function () {
@@ -51,8 +50,13 @@ Route::post('/new-account', [App\Http\Controllers\CustomerController::class, 'ne
 Route::get('/customer-statement/{id}', [App\Http\Controllers\CustomerController::class, 'statement']);
 Route::get('/check-deposit/{id}', [App\Http\Controllers\DepositController::class, 'check_deposit']);
 Route::get('/check-withdrawal/{id}', [App\Http\Controllers\WithdrawalController::class, 'check_withdrawal']);
+Route::get('/delteAccount/{id}', [App\Http\Controllers\AccountController::class, 'destroy']);
+
 
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+

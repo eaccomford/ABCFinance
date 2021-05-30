@@ -39,10 +39,10 @@ class AccountController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    { 
+    {
         try {
 
-            
+
 
             foreach ($_POST['name'] as $k => $value) {
 
@@ -51,29 +51,28 @@ class AccountController extends Controller
                     Session::flash('message', 'Enter Values in the form fields');
                     return view('pages.new-account');
                 }
-                
             }
 
             foreach ($_POST['name'] as $k => $value) {
-                $name  = $_POST['name'][$k]; $code = $_POST['code'][$k];
+                $name  = $_POST['name'][$k];
+                $code = $_POST['code'][$k];
                 // check duplicate
-                if(DB::table('accounts')->where('code', $code)->count() > 0){
-                    Session::flash('message', 'Error, Account code Already Exist, Code: '.$code);
+                if (DB::table('accounts')->where('code', $code)->count() > 0) {
+                    Session::flash('message', 'Error, Account code Already Exist, Code: ' . $code);
                     return view('pages.new-account');
-                }else{
-                    $requestData= [
+                } else {
+                    $requestData = [
                         'createdby' => Auth::id(),
                         'name' => $_POST['name'][$k],
                         'code' => $_POST['code'][$k],
                     ];
                     if (DB::table('accounts')->insert($requestData)) {
-                        Session::flash('message', 'Success, The record was created'); 
+                        Session::flash('message', 'Success, The record was created');
                     }
                 }
             }
 
             return redirect()->to('/new-account');
-
         } catch (\Exception $e) {
             return response()->json(
                 ['status' => 200, 'message' => 'error occured', 'error message' => $e]
@@ -113,6 +112,19 @@ class AccountController extends Controller
      */
     public function destroy($id)
     {
-        //
+       // echo (DB::table('customer_accounts')->where('account', $id)->count()); exit;
+        if (DB::table('customer_accounts')->where('account', $id)->count() > 0) {
+            return response()->json([
+                'message' => 'Error, Cant delete, Account is in use',
+                'res' => 0
+            ], 200);
+        } else {
+            Accounts::where('id', $id)->delete();
+            Session::flash('message', 'Success, The Account was deleted');
+            return response()->json([
+                'message' => 'deletion was successful',
+                'res' => 1
+            ], 200);
+        }
     }
 }

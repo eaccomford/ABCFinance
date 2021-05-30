@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class WithdrawalController extends Controller
 {
+    protected $withdrawalDispatch;
+
+    public function __construct(WithdrawalDispatchController $withdrawalDispatch)
+    {
+        $this->withdrawalDispatch = $withdrawalDispatch;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -119,32 +125,6 @@ class WithdrawalController extends Controller
 
     public function check_withdrawal($accno)
     {
-        $customer_accounts = DB::table('customer_accounts')->where('acc_number', $accno)->orderBy('id', 'desc')->take(5)->get();
-        if (count($customer_accounts) < 1) {
-            return response()->json([
-                'res' => 0,
-                'info' => 'No Record Found'
-            ], 200);
-        }
-        $withdrawals = DB::table('withdrawals')->where('acc_no', $accno)->orderBy('id', 'desc')->take(5)->get();
-        $accountInfo = DB::table('customers as c')
-            ->join('customer_accounts as a', 'c.id', '=', 'a.customer_id')
-            ->join('accounts as m', 'm.id', '=', 'a.account')
-            ->where('a.acc_number', $accno)->first();
-
-        $totalDeposit =  DB::table('deposits')->where('acc_no', $accno)->sum('total');
-        $totalWithdrawal =  DB::table('withdrawals')->where('acc_no', $accno)->sum('amount');
-        $data = [
-            'totalDeposit' => $totalDeposit,
-            'totalWithdrawal' => $totalWithdrawal,
-            'withdrawals' => $withdrawals,
-            'accountInfo' => $accountInfo
-        ];
-
-        return response()->json([
-            'info' => 'success',
-            'data' => $data,
-            'res' => 1,
-        ], 201);
+        return $this->withdrawalDispatch->check($accno);
     }
 }

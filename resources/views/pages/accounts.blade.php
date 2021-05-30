@@ -44,6 +44,9 @@
                         </div>
                     </div>
                     <div class="table-responsive">
+                        @if(Session::has('message'))
+                            <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+                        @endif
                         <table class="table invoice-data-table dt-responsive nowrap" style="width:100%">
                             <thead>
                                 <tr>
@@ -79,5 +82,19 @@
     </div>
     <!-- END: Content-->
 
-
+    <script src="{{asset('/')}}app-assets/js/core/libraries/jquery.min.js"></script>
+    <script>
+        function deleteAccount(id){
+            if (confirm('Delete the Account ?') === false) {
+                return 
+            }
+            $.get(`/delteAccount/${id}`, (res)=> {
+                if(res.res === 1){
+                    document.location.reload()
+                }else{
+                    alert(res.message)
+                }
+            })
+        }
+    </script>
     @endsection

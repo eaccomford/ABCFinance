@@ -67,6 +67,12 @@
                             <div class="card invoice-action-wrapper shadow-none border">
                                 <div class="card-body">
                                     <h4>Account Information</h4>
+                                    <div class="invoice-action-btn mb-1">
+                                        <a href="{{url('/accounts')}}" class="btn btn-primary btn-block invoice-send-btn">
+                                            <i class="bx bx-chevron-left"></i>
+                                            <span>Accounts</span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

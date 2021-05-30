@@ -59,7 +59,7 @@
                                                     <span>Phone</span> : {{ $withdrawal->phone }}
                                                 </div>
                                                 <div class="mb-1">
-                                                    <span>Address</span>: {{ $withdrawal->phone }}
+                                                    <span>Address</span>: {{ $withdrawal->address }}
                                                 </div>
                                                 <hr>
                                                 <div class="invoice-subtotal">

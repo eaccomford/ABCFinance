@@ -94,7 +94,7 @@ class CustomerController extends Controller
         }
     }
 
-    // create new account api
+    // create new account for api
     public function new_account(Request $request)
     {  // return $request->accounts[1]['account'];
         try {
@@ -229,10 +229,5 @@ class CustomerController extends Controller
         // 
     }
 
-    public function new_customer(Request $request)
-    {
-        return response()->json([
-            'message' => 'record Inserted love',
-        ], 401);
-    }
+    
 }

@@ -67,12 +67,13 @@
                                     </div>
                                     <!-- product details table-->
                                     <div class="invoice-product-details table-responsive mx-md-25">
+                                        <h6 class="invoice-from invoice-from pl-2">Accounts</h6>
                                         <table class="table table-borderless mb-0">
                                             <thead>
                                                 <tr class="border-0">
                                                     <th scope="col">Account name</th>
                                                     <th scope="col">Account Number</th>
-                                                    <th scope="col" class="text-right font-weight-bold">Current Balance</th>
+                                                    {{-- <th scope="col" class="text-right font-weight-bold">Current Balance</th> --}}
                                                     <th>Statement</th>
                                                 </tr>
                                             </thead>
@@ -81,7 +82,7 @@
                                                 <tr>
                                                     <td>{{$value->name}}</td>
                                                     <td>{{$value->acc_number}}</td>
-                                                    <td class="text-primary text-right font-weight-bold">GHC{{$value->amount}}</td>
+                                                    {{-- <td class="text-primary text-right font-weight-bold">GHC{{$value->amount}}</td> --}}
                                                     <th>
                                                         <a href="{{url('/customer-statement')}}/{{$value->acc_number}}" class="invoice-action-view mr-1">
                                                             <i class="bx bx-file"></i> 
@@ -95,23 +96,23 @@
                                     </div>
 
                                     <!-- invoice subtotal -->
-                                    <div class="card-body pt-0 mx-25">
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-4 col-sm-6 mt-75">
-                                                
-                                            </div>
-                                            <div class="col-8 col-sm-6 d-flex justify-content-end mt-75">
-                                                <div class="invoice-subtotal">
-                                                    <div class="invoice-calc d-flex justify-content-between">
-                                                        <span class="invoice-title">Subtotal</span>
-                                                        <span class="invoice-value pl-5">GHC 7600</span>
-                                                    </div>
+                                    {{-- <div class="card-body pt-0 mx-25">
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-4 col-sm-6 mt-75">
                                                     
                                                 </div>
+                                                <div class="col-8 col-sm-6 d-flex justify-content-end mt-75">
+                                                    <div class="invoice-subtotal">
+                                                        <div class="invoice-calc d-flex justify-content-between">
+                                                            <span class="invoice-title">Subtotal</span>
+                                                            <span class="invoice-value pl-5">GHC 7600</span>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        </div> --}}
                                 </div>
                             </div>
                         </div>
