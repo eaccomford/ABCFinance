@@ -13,7 +13,7 @@
             @import url('https://fonts.googleapis.com/css?family=Numans');
 
             html,body{
-            background-image: url({{asset('imgages/img1.jpg')}});
+            background-image: url({{asset('imgages/img2.jpg')}});
             background-size: cover;
             background-repeat: no-repeat;
             height: 100%;
