@@ -18,14 +18,8 @@ Route::get('/', function () {
 });
 
 
-Route::group(['prefix' => 'api/'], function () {
-    Route::get('/bookings', [App\Http\Controllers\BookingController::class, 'bookings']);
-    Route::post('/book', [App\Http\Controllers\BookingController::class, 'book']);
-});
 
-
-
-Route::get('/new-customer', [App\Http\Controllers\CustomerController::class, 'create']);
+Route::get('/new-customer', [App\Http\Controllers\CustomerController::class, 'create'])->name('new-customer');
 Route::get('/new-deposit', [App\Http\Controllers\DepositController::class, 'create']);
 Route::get('/new-withdrawal', [App\Http\Controllers\WithdrawalController::class, 'create']);
 Route::get('/new-account', [App\Http\Controllers\AccountController::class, 'create']);
@@ -48,12 +42,15 @@ Route::post('/account', [App\Http\Controllers\AccountController::class, 'store']
 Route::post('/new-account', [App\Http\Controllers\CustomerController::class, 'new_customer']);
 
 //** End Points */
+Route::group(['prefix' => 'api/'], function () {
+    Route::get('/bookings', [App\Http\Controllers\BookingController::class, 'bookings']);
+    Route::post('/book', [App\Http\Controllers\BookingController::class, 'book']);
+});
+
+Route::post('/new-account', [App\Http\Controllers\CustomerController::class, 'new_account']);
 Route::get('/customer-statement/{id}', [App\Http\Controllers\CustomerController::class, 'statement']);
 Route::get('/check-deposit/{id}', [App\Http\Controllers\DepositController::class, 'check_deposit']);
 Route::get('/check-withdrawal/{id}', [App\Http\Controllers\WithdrawalController::class, 'check_withdrawal']);
-
-
-
 
 
 Auth::routes();
