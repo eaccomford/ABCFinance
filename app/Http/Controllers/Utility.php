@@ -10,7 +10,7 @@ class Utility extends Controller
     {
         return  DB::table('customers as c')
             ->join('customer_accounts as a', 'c.id', '=', 'a.customer_id')
-            ->join('accounts as m', 'm.id', '=', 'a.account')
-            ->where('a.acc_number', $account_number)->first();
+            ->join('accounts as m', 'm.id', '=', 'a.account') 
+            ->where('a.acc_number', $account_number)->first(); 
     }
 }
