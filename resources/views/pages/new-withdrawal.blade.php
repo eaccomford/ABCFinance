@@ -46,6 +46,9 @@
                                                             <fieldset class="invoice-address form-group">
                                                                 <input type="number" name="amount" class="form-control" placeholder="Amount" required>
                                                             </fieldset>
+                                                            <fieldset class="invoice-address form-group">
+                                                                <input type="text" name="doneBy"   class="form-control" placeholder="Withdrawers Name" required>
+                                                             </fieldset>
                                                         </div>
                                                     </div>
 
@@ -155,7 +158,7 @@
                             $('.depositNotesBox').show()
 
                             $('#customerNmae').val(res.data.accountInfo.fname+ ' ' +res.data.accountInfo.lname)
-                            $('#totalDeposits').text(res.data.totalDeposit)
+                            $('#totalDeposits').text(res.data.totalDeposit  - res.data.totalWithdrawal)
                             $('#accType').text(res.data.accountInfo.name)
                             //lastFiveDeposits
                             $('#mainDepositBox').empty()

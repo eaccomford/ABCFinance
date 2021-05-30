@@ -50,6 +50,7 @@ class DepositController extends Controller
                 'acc_no' => 'required',
                 'date' => 'required',
                 'total' => 'required',
+                'doneBy' => 'required'
             );
             $validatedData = Validator::make($request->all(), $validate);
             if ($validatedData->fails()) {
@@ -58,6 +59,7 @@ class DepositController extends Controller
                 $requestData['acc_no'] = $request->acc_no;
                 $requestData['date'] = $request->date;
                 $requestData['total'] = $request->total;
+                $requestData['doneBy'] = $request->doneBy;
                 $requestData['createdby'] = Auth::id();
 
                 if ($inserId = DB::table('deposits')->insertGetId($requestData)) {
@@ -201,8 +203,10 @@ class DepositController extends Controller
             ->where('a.acc_number', $accno)->first();
 
         $totalDeposits = DB::table('deposits')->where('acc_no', $accno)->sum('total');
+        $totalWithdrawal =  DB::table('withdrawals')->where('acc_no', $accno)->sum('amount');
         $data = [
             'totalDeposits' => $totalDeposits,
+            'totalWithdrawal' => $totalWithdrawal,
             'deposits' => $deposits,
             'accountInfo' => $accountInfo
         ];

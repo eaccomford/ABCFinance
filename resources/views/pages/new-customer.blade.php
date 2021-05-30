@@ -57,7 +57,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th>Account name</th>
-                                                        <th>Initial Amount</th>
+                                                        {{-- <th>Initial Amount</th> --}}
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -71,7 +71,7 @@
                                                                 @endforeach
                                                             </select>
                                                         </td>
-                                                        <td><input type="number" name="amount[]" class="form-control" placeholder="Initial Amount"></td>
+                                                        {{-- <td><input type="number" name="amount[]" class="form-control" placeholder="Initial Amount"></td> --}}
                                                         <td>
                                                             <a href="#" class="btn btn-danger removeRow"><i class="bx bx-trash"></i></a>
                                                         </td>

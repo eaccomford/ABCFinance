@@ -15,8 +15,8 @@ class CreateAccountsTable extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
-            $table->text('code');
+            $table->string('name');
+            $table->string('code');
             $table->integer('createdby')->nullable()->useCurrent();
             $table->integer('modby')->nullable();
             $table->timestamps();

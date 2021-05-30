@@ -42,35 +42,37 @@ class AccountController extends Controller
     { 
         try {
 
+            
+
             foreach ($_POST['name'] as $k => $value) {
+
+                // check for empty
                 if ($_POST['name'][$k] === '' || $_POST['code'][$k] === '') {
                     Session::flash('message', 'Enter Values in the form fields');
                     return view('pages.new-account');
                 }
+                
             }
 
             foreach ($_POST['name'] as $k => $value) {
                 $name  = $_POST['name'][$k]; $code = $_POST['code'][$k];
+                // check duplicate
                 if(DB::table('accounts')->where('code', $code)->count() > 0){
-                    Session::flash('message', 'Error, Account code Already Exist');
+                    Session::flash('message', 'Error, Account code Already Exist, Code: '.$code);
                     return view('pages.new-account');
+                }else{
+                    $requestData= [
+                        'createdby' => Auth::id(),
+                        'name' => $_POST['name'][$k],
+                        'code' => $_POST['code'][$k],
+                    ];
+                    if (DB::table('accounts')->insert($requestData)) {
+                        Session::flash('message', 'Success, The record was created'); 
+                    }
                 }
             }
 
-            $requestData = [];
-            foreach ($_POST['name'] as $k => $value) {
-                $requestData[] = [
-                    'createdby' => Auth::id(),
-                    'name' => $_POST['name'][$k],
-                    'code' => $_POST['code'][$k],
-                ];
-            }
-
-            if (DB::table('accounts')->insert($requestData)) {
-                Session::flash('message', 'This is a message!'); 
-                return view('pages.accounts', ['accounts' => Accounts::all()]);
-            }
-
+            return redirect()->to('/new-account');
 
         } catch (\Exception $e) {
             return response()->json(

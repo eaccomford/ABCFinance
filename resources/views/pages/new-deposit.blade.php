@@ -40,8 +40,11 @@
                                                             <input type="text" class="form-control" id="customerNmae" placeholder="Account Name" readonly>
                                                         </fieldset>
                                                         <fieldset class="invoice-address form-group">
-                                                        <input type="text" name="date" id="date" value="{{ date('Y-m-d', strtotime(now()))}}" class="form-control" placeholder="date">
+                                                           <input type="text" name="date" id="date" value="{{ date('Y-m-d', strtotime(now()))}}" class="form-control" placeholder="date">
                                                         </fieldset>
+                                                        <fieldset class="invoice-address form-group">
+                                                            <input type="text" name="doneBy"  class="form-control" placeholder="Depositor Name" required>
+                                                         </fieldset>
                                                     </div>
                                                 </div>
                                                 <hr>
@@ -283,7 +286,7 @@
                             $('.depositNotesBox').show()
 
                             $('#customerNmae').val(res.data.accountInfo.fname+ ' ' +res.data.accountInfo.lname)
-                            $('#totalDeposits').text(res.data.totalDeposits)
+                            $('#totalDeposits').text(res.data.totalDeposits - res.data.totalWithdrawal)
                             $('#accType').text(res.data.accountInfo.name)
                             //lastFiveDeposits
                             $('#mainDepositBox').empty()

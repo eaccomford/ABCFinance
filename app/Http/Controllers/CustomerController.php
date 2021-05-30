@@ -74,21 +74,85 @@ class CustomerController extends Controller
                     foreach ($_POST['account'] as $k => $value) {
                         $accoutData[] = [
                             'account' => $_POST['account'][$k],
-                            'amount' => $_POST['amount'][$k],
                             'idcard' => $_POST['idcard'],
                             'acc_number' => $this->getAccountCode($_POST['account'][$k]).'300020008'.$inserId,
                             'customer_id' => $inserId
                         ];
                     }
                     DB::table('customer_accounts')->insert($accoutData);
+                    
 
                     Session::flash('message', 'Success, Record Inserted');
-                    return view('pages.new-customer',['accounts' => Accounts::all()]);
+                    //return view('pages.new-customer',['accounts' => Accounts::all()]);
+
+                    return redirect()->route('new-customer',['accounts' => Accounts::all()]);
                 }
             }
         } catch (\Exception $e) {
             Session::flash('error', 'error occured'.$e);
             return view('pages.new-customer',['accounts' => Accounts::all()]);
+        }
+    }
+
+    // create new account api
+    public function new_account(Request $request)
+    {  // return $request->accounts[1]['account'];
+        try {
+            $validate = array(
+                'fname' => 'required',
+                'lname' => 'required',
+                'phone' => 'required',
+                'address' => 'required',
+            );
+            $validatedData = Validator::make($request->all(), $validate);
+            if ($validatedData->fails()) {
+                return response()->json([
+                    'info' => 'Add payload',
+                    'error' => $validatedData->errors()
+                ],401);
+            } else {
+                // make customer dont exist by id card and account id
+                foreach ($request->accounts as $k => $value) {
+                    $code = $request->accounts[$k]['account'];
+                    if (DB::table('customer_accounts')->where('account', $code)->where('idcard', $request->idcard)->count() > 0) {
+                        return response()->json([
+                            'info' => 'Customer Already created'
+                        ],401);
+                    }
+                }
+
+
+                $requestData['fname'] = $request->fname;
+                $requestData['lname'] = $request->lname;
+                $requestData['phone'] = $request->phone;
+                $requestData['address'] = $request->address;
+                $requestData['createdby'] = Auth::id();
+
+                if ($inserId = DB::table('customers')->insertGetId($requestData)) {
+                    $accoutData = [];
+                    foreach ($request->accounts as $k => $value) {
+                        $accoutData[] = [
+                            'account' => $request->accounts[$k]['account'],
+                            'idcard' => $request->idcard,
+                            'acc_number' => $this->getAccountCode($request->accounts[$k]['account']).'300020008'.$inserId,
+                            'customer_id' => $inserId
+                        ];
+                    }
+                    DB::table('customer_accounts')->insert($accoutData);
+                    
+                    return response()->json([
+                        'info' => 'customer created',
+                        'data' => $requestData,
+                        'accounts' => $accoutData,
+                    ],200);
+                                
+                }
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'info' => 'error occured',
+                'err' => $e,
+            ],401);
         }
     }
 

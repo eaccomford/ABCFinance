@@ -15,8 +15,9 @@ class CreateDepositsTable extends Migration
     {
         Schema::create('deposits', function (Blueprint $table) {
             $table->id();
-            $table->integer('acc_no');
-            $table->text('total');
+            $table->string('acc_no');
+            $table->string('total');
+            $table->string('doneBy');
             $table->date('date');
             $table->integer('createdby')->nullable()->useCurrent();
             $table->integer('modby')->nullable();

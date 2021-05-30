@@ -47,6 +47,7 @@ class WithdrawalController extends Controller
                 'acc_no' => 'required',
                 'date' => 'required',
                 'amount' => 'required',
+                'doneBy' => 'required',
             );
             $validatedData = Validator::make($request->all(), $validate);
             if ($validatedData->fails()) {
@@ -55,6 +56,7 @@ class WithdrawalController extends Controller
                 $requestData['acc_no'] = $request->acc_no;
                 $requestData['date'] = $request->date;
                 $requestData['amount'] = $request->amount;
+                $requestData['doneBy'] = $request->doneBy;
                 $requestData['createdby'] = Auth::id();
 
                 if ($inserId = DB::table('withdrawals')->insertGetId($requestData)) {
@@ -131,8 +133,10 @@ class WithdrawalController extends Controller
             ->where('a.acc_number', $accno)->first();
 
         $totalDeposit =  DB::table('deposits')->where('acc_no', $accno)->sum('total');
+        $totalWithdrawal =  DB::table('withdrawals')->where('acc_no', $accno)->sum('amount');
         $data = [
             'totalDeposit' => $totalDeposit,
+            'totalWithdrawal' => $totalWithdrawal,
             'withdrawals' => $withdrawals,
             'accountInfo' => $accountInfo
         ];

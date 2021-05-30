@@ -19,7 +19,7 @@
                                         <div class="row">
                                             <div class="col-xl-4 col-md-12">
                                                 <span class="invoice-number mr-50">Customer Statement</span>
-                                                <span>000756</span>
+                                                <span></span>
                                             </div>
                                             <div class="col-xl-8 col-md-12">
                                                 <div class="d-flex align-items-center justify-content-xl-end flex-wrap">
@@ -66,10 +66,13 @@
                                                 <h6 class="invoice-from">Account Summary</h6>
                                                 <hr>
                                                 <div class="mb-1">
-                                                    <span>Deposits</span> : GHC {{ number_format($totalDeposit, 2) }}
+                                                    <b><span>Current Balance</span>: GHC {{ number_format($totalDeposit - $totalWithdrawal,2) }}</b>
                                                 </div>
                                                 <div class="mb-1">
-                                                    <span>Withdrawals</span>: GHC {{ number_format($totalWithdrawal,2) }}
+                                                    <span>Total Deposits</span> : GHC {{ number_format($totalDeposit, 2) }}
+                                                </div>
+                                                <div class="mb-1">
+                                                    <span>Total Withdrawals</span>: GHC {{ number_format($totalWithdrawal,2) }}
                                                 </div>
                                             </div>
                                             <div class="col-6 mt-1">
@@ -79,7 +82,7 @@
                                     </div>
                                     <!-- deposit transactions-->
                                     <div class="invoice-product-details table-responsive mx-md-25 mt-5">
-                                        <h6 class="invoice-from ml-2">Deposit Transactions</h6>
+                                        <h6 class="invoice-from ml-2">Withdrawal Transactions</h6>
                                         <hr>
                                         <table class="table table-borderless mb-0">
                                             <thead>
@@ -93,7 +96,7 @@
                                                 @foreach($withdrawals as $key => $value)
                                                 <tr>
                                                     <td>{{ $value->created_at }}</td>
-                                                    <td>Ama Lee</td>
+                                                    <td>{{ $value->doneBy }}</td>
                                                     <td class="text-primary text-right font-weight-bold">{{ number_format($value->amount,2) }}</td>
                                                 </tr>
                                                 @endforeach
@@ -103,7 +106,7 @@
 
                                     <!-- withdrawal transactions-->
                                     <div class="invoice-product-details table-responsive mx-md-25 mt-5">
-                                        <h6 class="invoice-from ml-2">Withdrawal Transactions</h6>
+                                        <h6 class="invoice-from ml-2">Deposit Transactions</h6>
                                         <hr>
                                         <table class="table table-borderless mb-0">
                                             <thead>
@@ -117,7 +120,7 @@
                                                 @foreach($deposits as $key => $value)
                                                 <tr>
                                                     <td>{{ $value->created_at }}</td>
-                                                    <td>Kofe Brown</td>
+                                                    <td>{{ $value->doneBy }}</td>
                                                     <td class="text-primary text-right font-weight-bold">{{ number_format($value->total,2) }}</td>
                                                 </tr>
                                                 @endforeach

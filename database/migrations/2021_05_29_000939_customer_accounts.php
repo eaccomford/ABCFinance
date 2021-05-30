@@ -16,10 +16,10 @@ class CustomerAccounts extends Migration
         Schema::create('customer_accounts', function (Blueprint $table) {
             $table->id();
             $table->integer('customer_id');
-            $table->text('account');
-            $table->text('amount');
-            $table->text('acc_number');
-            $table->text('idcard');
+            $table->string('account');
+            $table->float('amount')->nullable();
+            $table->string('acc_number');
+            $table->string('idcard');
             $table->integer('createdby')->nullable()->useCurrent();;
             $table->integer('modby')->nullable();
             $table->timestamps();

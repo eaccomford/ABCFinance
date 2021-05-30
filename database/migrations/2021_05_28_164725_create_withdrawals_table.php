@@ -15,8 +15,9 @@ class CreateWithdrawalsTable extends Migration
     {
         Schema::create('withdrawals', function (Blueprint $table) {
             $table->id();
-            $table->text('acc_no');
-            $table->text('amount');
+            $table->string('acc_no');
+            $table->string('amount');
+            $table->string('doneBy');
             $table->date('date');
             $table->integer('createdby')->nullable()->useCurrent();
             $table->integer('modby')->nullable();

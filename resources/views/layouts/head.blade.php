@@ -37,7 +37,8 @@
                      </li>
                      
                      <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                             <div class="user-nav d-sm-flex d-none"><span class="user-name">Accomford</span><span class="user-status text-muted">Available</span></div><span><img class="round" src="../../../app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"></span>
+                             <div class="user-nav d-sm-flex d-none"><span class="user-name">Accomford</span><span class="user-status text-muted">Available</span></div>
+                             <span><img class="round" src="{{asset('/')}}assets/me.jpg" alt="avatar" height="40" width="40"></span>
                          </a>
                          <div class="dropdown-menu dropdown-menu-right pb-0">
                              <a class="dropdown-item" href="page-user-profile.html"><i class="bx bx-user mr-50"></i> Edit Profile</a>
